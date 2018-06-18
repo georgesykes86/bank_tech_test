@@ -1,12 +1,14 @@
 package com.makersacademy.banktechtest.Unit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
 import com.makersacademy.banktechtest.Account;
 import com.makersacademy.banktechtest.Transaction;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 public class TransactionTest {
 
@@ -18,6 +20,8 @@ public class TransactionTest {
 
   @BeforeEach
   public void setUp() {
+    MockitoAnnotations.initMocks(this);
+    when(account.getBalance()).thenReturn(200);
     debitTransaction = new Transaction(-10, account);
     creditTransaction = new Transaction(20, account);
   }
@@ -29,5 +33,10 @@ public class TransactionTest {
 
   @Test
   public void setsAnotherAmount() { assertEquals(-10, debitTransaction.getAmount()); }
+
+  @Test
+  public void setsTheBalance() {
+    assertEquals(200, debitTransaction.getBalance());
+  }
 
 }
