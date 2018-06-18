@@ -12,37 +12,36 @@ public class AccountTest {
   @Before
   public void setUp() {
     account = new Account();
+    account.deposit(100);
   }
 
   @Test
   public void accountHasBalance() {
-    assertEquals(0, account.getBalance());
+    Account newAccount = new Account();
+    assertEquals(0, newAccount.getBalance());
   }
 
   @Test
   public void accountMakesDeposit() {
-    account.deposit(100);
     assertEquals(100, account.getBalance());
   }
 
   @Test
   public void accountMakesSecondDeposit() {
-    account.deposit(50);
-    account.deposit(200);
+    account.deposit(150);
     assertEquals(250, account.getBalance());
   }
 
   @Test
   public void accountMakesWithdrawal() {
-    account.deposit(100);
     account.withdraw(50);
     assertEquals(50, account.getBalance());
   }
 
   @Test
   public void accountMakesDifferentWithdrawal() {
-    account.deposit(100);
     account.withdraw(100);
     assertEquals(0, account.getBalance());
   }
+  
 }
