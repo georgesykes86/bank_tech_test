@@ -1,5 +1,6 @@
 package com.makersacademy.banktechtest;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -7,8 +8,16 @@ import org.junit.jupiter.api.Test;
 public class ZeroBalanceExceptionTest {
 
   @Test
-  public void isThrowable() {
+  public void isThrowableWithoutMessage() {
     assertThrows(ZeroBalanceException.class, () -> { throw new ZeroBalanceException(); });
+  }
+
+  @Test
+  public void hasErrorMessageWhenThrown() {
+    Throwable exception = assertThrows(ZeroBalanceException.class, () -> {
+      throw new ZeroBalanceException("Insufficient Funds");
+    });
+    assertEquals("Insufficient Funds", exception.getMessage());
   }
 
 }
