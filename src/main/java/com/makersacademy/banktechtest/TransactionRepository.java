@@ -4,10 +4,18 @@ import java.util.ArrayList;
 
 public class TransactionRepository {
 
-  public TransactionRepository() {}
+  private ArrayList<Transaction> transactions;
+
+  public TransactionRepository() {
+    this.transactions = new ArrayList<>();
+  }
 
   public ArrayList<Transaction> getTransactions() {
-    return new ArrayList<>();
+    return transactions;
+  }
+
+  public void addTransaction(int amount, Account account) {
+    transactions.add(new Transaction());
   }
 
 }
