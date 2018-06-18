@@ -34,15 +34,24 @@ public class AccountTest {
   }
 
   @Test
-  public void accountMakesWithdrawal() {
+  public void accountMakesWithdrawal() throws ZeroBalanceException {
     account.withdraw(50);
     assertEquals(50, account.getBalance());
   }
 
   @Test
-  public void accountMakesDifferentWithdrawal() {
+  public void accountMakesDifferentWithdrawal() throws ZeroBalanceException {
     account.withdraw(100);
     assertEquals(0, account.getBalance());
+  }
+
+  @Test
+  public void accountThrowsErrorIfZeroBalance() {
+    Account newAccount = new Account();
+    Throwable exception = assertThrows(ZeroBalanceException.class, () -> {
+      newAccount.withdraw(100);
+    });
+    assertEquals("Insufficient Funds", exception.getMessage());
   }
 
 }
