@@ -16,14 +16,18 @@ public class TransactionTest {
   private Transaction creditTransaction;
 
   @Mock
-  private Account account;
+  private Account firstAccount;
+
+  @Mock
+  private Account secondAccount;
 
   @BeforeEach
   public void setUp() {
     MockitoAnnotations.initMocks(this);
-    when(account.getBalance()).thenReturn(200);
-    debitTransaction = new Transaction(-10, account);
-    creditTransaction = new Transaction(20, account);
+    when(firstAccount.getBalance()).thenReturn(200);
+    when(secondAccount.getBalance()).thenReturn(300);
+    debitTransaction = new Transaction(-10, firstAccount);
+    creditTransaction = new Transaction(20, secondAccount);
   }
 
   @Test
@@ -37,6 +41,12 @@ public class TransactionTest {
   @Test
   public void setsTheBalance() {
     assertEquals(200, debitTransaction.getBalance());
+  }
+
+  @Test
+  public void setsDifferentBalance() {
+
+    assertEquals(300, creditTransaction.getBalance());
   }
 
 }
