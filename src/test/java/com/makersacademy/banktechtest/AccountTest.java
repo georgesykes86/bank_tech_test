@@ -1,22 +1,23 @@
 package com.makersacademy.banktechtest;
 
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class AccountTest {
 
   private Account account;
 
-  @Before
+  @BeforeEach
   public void setUp() {
     account = new Account();
     account.deposit(100);
   }
 
   @Test
-  public void accountHasBalance() {
+  public void accountHasZeroBalanceInitially() {
     Account newAccount = new Account();
     assertEquals(0, newAccount.getBalance());
   }
@@ -43,5 +44,5 @@ public class AccountTest {
     account.withdraw(100);
     assertEquals(0, account.getBalance());
   }
-  
+
 }
