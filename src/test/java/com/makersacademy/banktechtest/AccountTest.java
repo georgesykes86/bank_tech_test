@@ -24,4 +24,11 @@ public class AccountTest {
     account.deposit(100);
     assertEquals(100, account.getBalance());
   }
+
+  @Test
+  public void accountMakesSecondDeposit() {
+    account.deposit(50);
+    account.deposit(200);
+    assertEquals(250, account.getBalance());
+  }
 }
