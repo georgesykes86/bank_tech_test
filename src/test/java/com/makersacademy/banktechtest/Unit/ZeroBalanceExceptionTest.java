@@ -1,8 +1,9 @@
-package com.makersacademy.banktechtest;
+package com.makersacademy.banktechtest.Unit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import com.makersacademy.banktechtest.ZeroBalanceException;
 import org.junit.jupiter.api.Test;
 
 public class ZeroBalanceExceptionTest {

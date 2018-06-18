@@ -1,8 +1,10 @@
-package com.makersacademy.banktechtest;
+package com.makersacademy.banktechtest.Unit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import com.makersacademy.banktechtest.Account;
+import com.makersacademy.banktechtest.ZeroBalanceException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -41,8 +43,8 @@ public class AccountTest {
 
   @Test
   public void accountMakesDifferentWithdrawal() throws ZeroBalanceException {
-    account.withdraw(100);
-    assertEquals(0, account.getBalance());
+    account.withdraw(80);
+    assertEquals(20, account.getBalance());
   }
 
   @Test
@@ -52,6 +54,17 @@ public class AccountTest {
       newAccount.withdraw(100);
     });
     assertEquals("Insufficient Funds", exception.getMessage());
+  }
+
+  @Test
+  public void accountThrowsErrorIfWithdrawalWillCauseNegativeBalance() {
+    assertThrows(ZeroBalanceException.class, () -> { account.withdraw(101); });
+  }
+
+  @Test
+  public void accountDoesntThrowErrorWhenWithdrawalMakesZeroBalance() throws ZeroBalanceException {
+    account.withdraw(100);
+    assertEquals(0, account.getBalance());
   }
 
 }
