@@ -20,4 +20,12 @@ public class ZeroBalanceExceptionTest {
     assertEquals("Insufficient Funds", exception.getMessage());
   }
 
+  @Test
+  public void throwsWithDifferentErrorMessage() {
+    Throwable exception = assertThrows(ZeroBalanceException.class, () -> {
+      throw new ZeroBalanceException("Too Many Funds");
+    });
+    assertEquals("Too Many Funds", exception.getMessage());
+  }
+
 }
