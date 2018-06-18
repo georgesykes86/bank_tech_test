@@ -19,16 +19,17 @@ public class PrintsAccountHistoryTest {
   private Date date = new Date();
   private final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyy");
   private String dateFormatted = dateFormat.format(date);
-  private final String firstTestOutput = "date || credit || debit || balance\n"
-      + dateFormatted + " || || 500.00 || 2500.00\n"
-      + dateFormatted + " || 2000.00 || || 3000.00\n"
-      + dateFormatted + " || 1000.00 || || 1000.00";
 
   @BeforeEach
   public void setUp() {
     account = new Account();
     System.setOut(new PrintStream(output));
   }
+
+  private final String firstTestOutput = "date || credit || debit || balance\n"
+      + dateFormatted + " || || 500.00 || 2500.00\n"
+      + dateFormatted + " || 2000.00 || || 3000.00\n"
+      + dateFormatted + " || 1000.00 || || 1000.00";
 
   @Test
   public void printsAnAccountHistory() throws ZeroBalanceException {
@@ -37,6 +38,20 @@ public class PrintsAccountHistoryTest {
     account.withdraw(500);
     account.printStatement();
     assertEquals(firstTestOutput, output.toString());
+  }
+
+  private final String secondTestOutput = "date || credit || debit || balance\n"
+      + dateFormatted + " || || 1500.00 || 3500.00\n"
+      + dateFormatted + " || 3000.00 || || 5000.00\n"
+      + dateFormatted + " || 2000.00 || || 2000.00";
+
+  @Test
+  public void printsAnotherAccountHistory() throws ZeroBalanceException {
+    account.deposit(2000);
+    account.deposit(3000);
+    account.withdraw(1500);
+    account.printStatement();
+    assertEquals(secondTestOutput, output.toString());
   }
 
 
