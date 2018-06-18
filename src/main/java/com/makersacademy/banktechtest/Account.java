@@ -2,10 +2,15 @@ package com.makersacademy.banktechtest;
 
 public class Account {
 
-  public Account() {
-  }
+  private int balance;
+
+  public Account() {}
 
   public int getBalance() {
-    return 0;
+    return this.balance;
+  }
+
+  public void deposit(int amount) {
+    this.balance = amount;
   }
 }
