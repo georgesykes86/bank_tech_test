@@ -5,6 +5,9 @@ import static org.mockito.Mockito.when;
 
 import com.makersacademy.banktechtest.Account;
 import com.makersacademy.banktechtest.Transaction;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -14,6 +17,9 @@ public class TransactionTest {
 
   private Transaction debitTransaction;
   private Transaction creditTransaction;
+  private Date date = new Date();
+  private final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyy");
+  private String dateFormatted = dateFormat.format(date);
 
   @Mock
   private Account firstAccount;
@@ -45,8 +51,12 @@ public class TransactionTest {
 
   @Test
   public void setsDifferentBalance() {
-
     assertEquals(300, creditTransaction.getBalance());
+  }
+
+  @Test
+  public void setsDate() {
+    assertEquals(dateFormatted, creditTransaction.getDate());
   }
 
 }
