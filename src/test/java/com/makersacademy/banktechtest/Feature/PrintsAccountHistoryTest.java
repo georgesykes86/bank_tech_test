@@ -2,12 +2,8 @@ package com.makersacademy.banktechtest.Feature;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.makersacademy.banktechtest.Account;
+import com.makersacademy.banktechtest.*;
 import com.makersacademy.banktechtest.Exceptions.InvalidTransactionAmountException;
-import com.makersacademy.banktechtest.Printer;
-import com.makersacademy.banktechtest.Statement;
-import com.makersacademy.banktechtest.TransactionFactory;
-import com.makersacademy.banktechtest.TransactionRepository;
 import com.makersacademy.banktechtest.Exceptions.ZeroBalanceException;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -52,7 +48,6 @@ public class PrintsAccountHistoryTest {
         + dateFormatted + " || || 1500.00 || 3500.00\n"
         + dateFormatted + " || 3000.00 || || 5000.00\n"
         + dateFormatted + " || 2000.00 || || 2000.00\n";
-
   }
 
   @Test

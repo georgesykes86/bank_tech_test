@@ -20,9 +20,6 @@ public class TransactionRepositoryTest {
   private TransactionRepository repository;
 
   @Mock
-  private Account account;
-
-  @Mock
   private Transaction transaction;
 
   @Mock
@@ -45,15 +42,15 @@ public class TransactionRepositoryTest {
 
   @Test
   public void addsTransaction() {
-    repository.addTransaction(10, account);
+    repository.addTransaction(10, 100);
     assertEquals(1, repository.getTransactions().size());
     assertTrue(repository.getTransactions().contains(transaction));
   }
 
   @Test
   public void passesAccountToTransaction() {
-    repository.addTransaction(10, account);
-    verify(transaction).buildTransaction(10, account);
+    repository.addTransaction(10, 100);
+    verify(transaction).buildTransaction(10, 100);
   }
 
 }

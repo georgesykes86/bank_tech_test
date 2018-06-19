@@ -34,13 +34,14 @@ public class AccountTest {
   private Statement statement;
 
   private final ArrayList<Transaction> transactions = new ArrayList<>();
+  private final float balance = 100;
 
   @BeforeEach
   public void setUp() throws InvalidTransactionAmountException {
     MockitoAnnotations.initMocks(this);
     when(statement.toString()).thenReturn(returnString);
     account = new Account(repository, printer, statement);
-    account.deposit(100);
+    account.deposit(balance);
   }
 
   @Test
@@ -63,13 +64,13 @@ public class AccountTest {
   @Test
   public void accountMakesNewTransactionOnDeposit() throws InvalidTransactionAmountException {
     account.deposit(150);
-    verify(repository).addTransaction(150, account);
+    verify(repository).addTransaction(150, balance + 150);
   }
 
   @Test
   public void accountMakesAnotherNewTransactionOnDeposit() throws InvalidTransactionAmountException {
     account.deposit(250);
-    verify(repository).addTransaction(250, account);
+    verify(repository).addTransaction(250, balance + 250);
   }
 
   @Test
@@ -147,14 +148,14 @@ public class AccountTest {
   public void accountCreatesTransactionOnWithdrawal() throws ZeroBalanceException,
       InvalidTransactionAmountException {
     account.withdraw(80);
-    verify(repository).addTransaction(-80, account);
+    verify(repository).addTransaction(-80, balance - 80);
   }
 
   @Test
   public void accountCreatesTransactionOnDifferentWithdrawal() throws ZeroBalanceException,
       InvalidTransactionAmountException {
     account.withdraw(10);
-    verify(repository).addTransaction(-10, account);
+    verify(repository).addTransaction(-10, balance - 10);
   }
 
   @Test

@@ -16,13 +16,13 @@ public class TransactionRepository {
     return transactions;
   }
 
-  public void addTransaction(float amount, Account account) {
-    transactions.add(createTransaction(amount, account));
+  public void addTransaction(float amount, float balance) {
+    transactions.add(createTransaction(amount, balance));
   }
 
-  private Transaction createTransaction(float amount, Account account) {
+  private Transaction createTransaction(float amount, float balance) {
     Transaction transaction = this.transactionFactory.getTransaction();
-    transaction.buildTransaction(amount, account);
+    transaction.buildTransaction(amount, balance);
     return transaction;
   }
 

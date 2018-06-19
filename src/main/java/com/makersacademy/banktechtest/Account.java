@@ -23,7 +23,7 @@ public class Account {
   public void deposit(float amount) throws InvalidTransactionAmountException {
     if(amount <= 0 ) throw new InvalidTransactionAmountException("Amount must be greater than Zero");
     this.balance += amount;
-    this.repository.addTransaction(amount, this);
+    this.repository.addTransaction(amount, this.getBalance());
   }
 
   public void withdraw(float amount) throws ZeroBalanceException,
@@ -31,7 +31,7 @@ public class Account {
     if(amount <= 0 ) throw new InvalidTransactionAmountException("Amount must be greater than Zero");
     if((this.balance - amount) < 0) throw new ZeroBalanceException("Insufficient Funds");
     this.balance -= amount;
-    this.repository.addTransaction((-amount), this);
+    this.repository.addTransaction((-amount), this.getBalance());
   }
 
   public void printStatement() {

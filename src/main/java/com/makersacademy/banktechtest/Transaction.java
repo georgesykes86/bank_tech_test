@@ -1,7 +1,6 @@
 package com.makersacademy.banktechtest;
 
 import java.time.LocalDateTime;
-import java.util.Calendar;
 
 public class Transaction {
 
@@ -11,9 +10,9 @@ public class Transaction {
 
   public Transaction() {}
 
-  public void buildTransaction(float amount, Account account) {
+  public void buildTransaction(float amount, float balance) {
     this.amount = amount;
-    this.balance = account.getBalance();
+    this.balance = balance;
     this.date = setDate();
   }
 
