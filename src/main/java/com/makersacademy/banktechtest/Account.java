@@ -16,6 +16,7 @@ public class Account {
   }
 
   public void deposit(int amount) {
+    this.repository.addTransaction(amount, this);
     this.balance += amount;
   }
 

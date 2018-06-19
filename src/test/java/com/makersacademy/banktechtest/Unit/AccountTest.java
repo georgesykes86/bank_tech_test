@@ -51,6 +51,12 @@ public class AccountTest {
   }
 
   @Test
+  public void accountMakesNewTransactionOnDeposit() {
+    account.deposit(150);
+    verify(repository).addTransaction(150, account);
+  }
+
+  @Test
   public void accountMakesWithdrawal() throws ZeroBalanceException {
     account.withdraw(50);
     assertEquals(50, account.getBalance());
@@ -85,7 +91,7 @@ public class AccountTest {
   @Test
   public void printsCorrectString() {
     account.printStatement();
-    verify(printer).print("date || credit || debit || balance\n" + "This Return String");
+    verify(printer).print("date || credit || debit || balance\n" + returnString);
   }
 
 }
