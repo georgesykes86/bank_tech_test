@@ -57,6 +57,12 @@ public class AccountTest {
   }
 
   @Test
+  public void accountMakesAnotherNewTransactionOnDeposit() {
+    account.deposit(250);
+    verify(repository).addTransaction(250, account);
+  }
+
+  @Test
   public void accountMakesWithdrawal() throws ZeroBalanceException {
     account.withdraw(50);
     assertEquals(50, account.getBalance());
