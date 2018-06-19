@@ -104,6 +104,11 @@ public class AccountTest {
   }
 
   @Test
+  public void throwsErrorIfZeroWithdrawalAmountEntered() {
+    assertThrows(InvalidTransactionAmountException.class, () -> { account.withdraw(0); });
+  }
+
+  @Test
   public void accountCreatesTransactionOnWithdrawal() throws ZeroBalanceException,
       InvalidTransactionAmountException {
     account.withdraw(80);
