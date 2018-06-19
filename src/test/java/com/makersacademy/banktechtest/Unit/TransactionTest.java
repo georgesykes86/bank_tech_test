@@ -1,12 +1,12 @@
 package com.makersacademy.banktechtest.Unit;
 
+import static java.lang.Math.abs;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 import com.makersacademy.banktechtest.Account;
 import com.makersacademy.banktechtest.Transaction;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,8 +18,6 @@ public class TransactionTest {
   private Transaction debitTransaction;
   private Transaction creditTransaction;
   private Date date = new Date();
-  private final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyy");
-  private String dateFormatted = dateFormat.format(date);
 
   @Mock
   private Account firstAccount;
@@ -37,9 +35,6 @@ public class TransactionTest {
     debitTransaction.buildTransaction(-10.00f, firstAccount);
     creditTransaction.buildTransaction( 20.00f, secondAccount);
   }
-
-  private String creditOutput = dateFormatted + " || 20.00 || || 300.00";
-  private String debitOutput = dateFormatted + " || || 10.00 || 200.00";
 
   @Test
   public void setsTheAmount(){
@@ -61,13 +56,7 @@ public class TransactionTest {
 
   @Test
   public void setsDate() {
-    assertEquals(dateFormatted, creditTransaction.getDate());
+    assertTrue(abs(date.getTime() - creditTransaction.getDate().getTime()) < 1000);
   }
-
-  @Test
-  public void generatesOutputStringForCredit() { assertEquals(creditOutput, creditTransaction.toString()); }
-
-  @Test
-  public void generatesOutputStringForDebit() { assertEquals(debitOutput, debitTransaction.toString()); }
 
 }
