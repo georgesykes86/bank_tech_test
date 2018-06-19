@@ -10,7 +10,9 @@ public class Transaction {
   private int balance;
   private String date;
 
-  public Transaction(int amount, Account account) {
+  public Transaction() {}
+
+  public void buildTransaction(int amount, Account account) {
     this.amount = amount;
     this.balance = account.getBalance();
     this.date = setDate();

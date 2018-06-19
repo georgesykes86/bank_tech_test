@@ -32,8 +32,10 @@ public class TransactionTest {
     MockitoAnnotations.initMocks(this);
     when(firstAccount.getBalance()).thenReturn(200);
     when(secondAccount.getBalance()).thenReturn(300);
-    debitTransaction = new Transaction(-10, firstAccount);
-    creditTransaction = new Transaction(20, secondAccount);
+    debitTransaction = new Transaction();
+    creditTransaction = new Transaction();
+    debitTransaction.buildTransaction(-10, firstAccount);
+    creditTransaction.buildTransaction(20, secondAccount);
   }
 
   @Test
