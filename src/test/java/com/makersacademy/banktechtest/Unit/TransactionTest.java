@@ -38,6 +38,9 @@ public class TransactionTest {
     creditTransaction.buildTransaction(20, secondAccount);
   }
 
+  private String creditOutput = dateFormatted + " || 20 || || 300";
+  private String debitOutput = dateFormatted + " || || 10 || 200";
+
   @Test
   public void setsTheAmount(){
     assertEquals(20, creditTransaction.getAmount());
@@ -60,5 +63,11 @@ public class TransactionTest {
   public void setsDate() {
     assertEquals(dateFormatted, creditTransaction.getDate());
   }
+
+  @Test
+  public void generatesOutputStringForCredit() { assertEquals(creditOutput, creditTransaction.toString()); }
+
+  @Test
+  public void generatesOutputStringForDebit() { assertEquals(debitOutput, debitTransaction.toString()); }
 
 }
