@@ -1,13 +1,10 @@
 package com.makersacademy.banktechtest.Unit;
 
-import static java.lang.Math.abs;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
-
 import com.makersacademy.banktechtest.Account;
 import com.makersacademy.banktechtest.Transaction;
-import java.util.Date;
+import java.time.LocalDateTime;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -17,7 +14,7 @@ public class TransactionTest {
 
   private Transaction debitTransaction;
   private Transaction creditTransaction;
-  private Date date = new Date();
+  private LocalDateTime date;
 
   @Mock
   private Account firstAccount;
@@ -34,6 +31,7 @@ public class TransactionTest {
     creditTransaction = new Transaction();
     debitTransaction.buildTransaction(-10.00f, firstAccount);
     creditTransaction.buildTransaction( 20.00f, secondAccount);
+    date = LocalDateTime.now();
   }
 
   @Test
@@ -56,7 +54,7 @@ public class TransactionTest {
 
   @Test
   public void setsDate() {
-    assertTrue(abs(date.getTime() - creditTransaction.getDate().getTime()) < 1000);
+    assertEquals(date.toLocalDate(), creditTransaction.getDate().toLocalDate());
   }
 
 }

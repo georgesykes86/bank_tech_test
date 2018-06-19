@@ -1,4 +1,4 @@
-package com.makersacademy.banktechtest;
+package com.makersacademy.banktechtest.Exceptions;
 
 public class InvalidTransactionAmountException extends Exception {
 

@@ -3,11 +3,12 @@ package com.makersacademy.banktechtest.Feature;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.makersacademy.banktechtest.Account;
-import com.makersacademy.banktechtest.InvalidTransactionAmountException;
+import com.makersacademy.banktechtest.Exceptions.InvalidTransactionAmountException;
 import com.makersacademy.banktechtest.Printer;
+import com.makersacademy.banktechtest.Statement;
 import com.makersacademy.banktechtest.TransactionFactory;
 import com.makersacademy.banktechtest.TransactionRepository;
-import com.makersacademy.banktechtest.ZeroBalanceException;
+import com.makersacademy.banktechtest.Exceptions.ZeroBalanceException;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.text.DateFormat;
@@ -28,7 +29,7 @@ public class PrintsAccountHistoryTest {
 
   @BeforeEach
   public void setUp() {
-    account = new Account(new TransactionRepository(new TransactionFactory()), new Printer());
+    account = new Account(new TransactionRepository(new TransactionFactory()), new Printer(), new Statement());
     System.setOut(new PrintStream(output));
     date =  new Date();
     dateFormatted = dateFormat.format(date);

@@ -1,12 +1,13 @@
 package com.makersacademy.banktechtest;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.Calendar;
 
 public class Transaction {
 
   private float amount;
   private float balance;
-  private Date date;
+  private LocalDateTime date;
 
   public Transaction() {}
 
@@ -20,10 +21,10 @@ public class Transaction {
 
   public float getBalance() { return this.balance; }
 
-  private Date setDate() {
-    return new Date();
+  private LocalDateTime setDate() {
+    return LocalDateTime.now();
   }
 
-  public Date getDate() { return this.date; }
+  public LocalDateTime getDate() { return this.date; }
 
 }

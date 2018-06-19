@@ -56,17 +56,4 @@ public class TransactionRepositoryTest {
     verify(transaction).buildTransaction(10, account);
   }
 
-  @Test
-  public void returnsPrintStringForSingleTransaction() {
-    repository.addTransaction(10, account);
-    assertEquals("String\n", repository.printTransactions());
-  }
-
-  @Test
-  public void returnsPrintStringForMultipleTransactionsInCorrectOrder() {
-    repository.addTransaction(10, account);
-    repository.addTransaction(10, account);
-    assertEquals("SecondString\nString\n", repository.printTransactions());
-  }
-
 }

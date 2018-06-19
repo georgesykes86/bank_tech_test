@@ -1,15 +1,19 @@
 package com.makersacademy.banktechtest.Unit;
 
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 import com.makersacademy.banktechtest.Account;
-import com.makersacademy.banktechtest.InvalidTransactionAmountException;
+import com.makersacademy.banktechtest.Exceptions.InvalidTransactionAmountException;
 import com.makersacademy.banktechtest.Printer;
+import com.makersacademy.banktechtest.Statement;
+import com.makersacademy.banktechtest.Transaction;
 import com.makersacademy.banktechtest.TransactionRepository;
-import com.makersacademy.banktechtest.ZeroBalanceException;
+import com.makersacademy.banktechtest.Exceptions.ZeroBalanceException;
+import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -26,17 +30,22 @@ public class AccountTest {
   @Mock
   private Printer printer;
 
+  @Mock
+  private Statement statement;
+
+  private final ArrayList<Transaction> transactions = new ArrayList<>();
+
   @BeforeEach
   public void setUp() throws InvalidTransactionAmountException {
     MockitoAnnotations.initMocks(this);
-    when(repository.printTransactions()).thenReturn(returnString);
-    account = new Account(repository, printer);
+    when(statement.toString()).thenReturn(returnString);
+    account = new Account(repository, printer, statement);
     account.deposit(100);
   }
 
   @Test
   public void accountHasZeroBalanceInitially() {
-    Account newAccount = new Account(repository, printer);
+    Account newAccount = new Account(repository, printer, statement);
     assertEquals(0, newAccount.getBalance());
   }
 
@@ -97,7 +106,7 @@ public class AccountTest {
 
   @Test
   public void accountThrowsErrorIfZeroBalance() {
-    Account newAccount = new Account(repository, printer);
+    Account newAccount = new Account(repository, printer, statement);
     Throwable exception = assertThrows(ZeroBalanceException.class, () -> {
       newAccount.withdraw(100);
     });
@@ -151,7 +160,13 @@ public class AccountTest {
   @Test
   public void printsCorrectString() {
     account.printStatement();
-    verify(printer).print("date || credit || debit || balance\n" + returnString);
+    verify(printer).print(returnString);
+  }
+
+  @Test
+  public void createsStatement() {
+    account.printStatement();
+    verify(statement).setTransactions(any());
   }
 
 }

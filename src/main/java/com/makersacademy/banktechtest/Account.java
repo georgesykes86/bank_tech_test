@@ -1,14 +1,19 @@
 package com.makersacademy.banktechtest;
 
+import com.makersacademy.banktechtest.Exceptions.InvalidTransactionAmountException;
+import com.makersacademy.banktechtest.Exceptions.ZeroBalanceException;
+
 public class Account {
 
   private float balance;
   private TransactionRepository repository;
   private Printer printer;
+  private Statement statement;
 
-  public Account(TransactionRepository repository, Printer printer) {
+  public Account(TransactionRepository repository, Printer printer, Statement statement) {
     this.repository = repository;
     this.printer = printer;
+    this.statement = statement;
   }
 
   public float getBalance() {
@@ -30,13 +35,12 @@ public class Account {
   }
 
   public void printStatement() {
-    printer.print(
-        getStatementHeader() + "\n" + repository.printTransactions()
-    );
+    createStatement();
+    printer.print(statement.toString());
   }
 
-  private String getStatementHeader() {
-    return "date || credit || debit || balance";
+  private void createStatement() {
+    statement.setTransactions(repository.getTransactions());
   }
 
 }
