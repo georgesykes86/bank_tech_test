@@ -5,5 +5,4 @@ public class TransactionFactory {
   public Transaction getTransaction() {
     return new Transaction();
   }
-
 }

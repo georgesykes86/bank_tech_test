@@ -32,6 +32,7 @@ public class TransactionRepositoryTest {
   public void setUp() {
     MockitoAnnotations.initMocks(this);
     when(factory.getTransaction()).thenReturn(transaction);
+    when(transaction.toString()).thenReturn("String");
     repository = new TransactionRepository(factory);
   }
 
@@ -51,6 +52,12 @@ public class TransactionRepositoryTest {
   public void passesAccountToTransaction() {
     repository.addTransaction(10, account);
     verify(transaction).buildTransaction(10, account);
+  }
+
+  @Test
+  public void returnsPrintStringForTransactions() {
+    repository.addTransaction(10, account);
+    assertEquals("String\n", repository.printTransactions());
   }
 
 }

@@ -26,4 +26,8 @@ public class TransactionRepository {
     return transaction;
   }
 
+  public String printTransactions() {
+    return "String\n";
+  }
+
 }
