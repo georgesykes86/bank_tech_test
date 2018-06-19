@@ -64,5 +64,4 @@ public class StatementTest {
     assertEquals(secondTestOutput, statement.toString());
   }
 
-
 }

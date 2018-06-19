@@ -26,6 +26,7 @@ public class PrintsAccountHistoryTest {
   private String dateFormatted;
   private String firstTestOutput = null;
   private String secondTestOutput = null;
+  private String longStatement = null;
 
   @BeforeEach
   public void setUp() {
@@ -43,6 +44,15 @@ public class PrintsAccountHistoryTest {
         + dateFormatted + " || || 1500.00 || 3500.00\n"
         + dateFormatted + " || 3000.00 || || 5000.00\n"
         + dateFormatted + " || 2000.00 || || 2000.00\n";
+
+    longStatement = "date || credit || debit || balance\n"
+        + dateFormatted + " || || 500.00 || 6000.00\n"
+        + dateFormatted + " || 2000.00 || || 6500.00\n"
+        + dateFormatted + " || 1000.00 || || 4500.00\n"
+        + dateFormatted + " || || 1500.00 || 3500.00\n"
+        + dateFormatted + " || 3000.00 || || 5000.00\n"
+        + dateFormatted + " || 2000.00 || || 2000.00\n";
+
   }
 
   @Test
@@ -63,6 +73,21 @@ public class PrintsAccountHistoryTest {
     account.withdraw(1500);
     account.printStatement();
     assertEquals(secondTestOutput, output.toString());
+  }
+
+  @Test
+  public void printsDifferentStatementsAfterExtraTransactions() throws ZeroBalanceException,
+      InvalidTransactionAmountException {
+    account.deposit(2000);
+    account.deposit(3000);
+    account.withdraw(1500);
+    account.printStatement();
+    assertEquals(secondTestOutput, output.toString());
+    account.deposit(1000);
+    account.deposit(2000);
+    account.withdraw(500);
+    account.printStatement();
+    assertEquals(secondTestOutput + longStatement, output.toString());
   }
 
 }
