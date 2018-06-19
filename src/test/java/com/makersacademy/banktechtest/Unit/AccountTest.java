@@ -167,6 +167,7 @@ public class AccountTest {
   @Test
   public void createsStatement() {
     account.printStatement();
+    verify(repository).getTransactions();
     verify(statement).setTransactions(any());
   }
 

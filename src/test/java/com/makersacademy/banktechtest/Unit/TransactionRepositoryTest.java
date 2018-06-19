@@ -5,10 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import com.makersacademy.banktechtest.Account;
-import com.makersacademy.banktechtest.Transaction;
-import com.makersacademy.banktechtest.TransactionFactory;
-import com.makersacademy.banktechtest.TransactionRepository;
+import com.makersacademy.banktechtest.*;
 import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,27 +26,30 @@ public class TransactionRepositoryTest {
   public void setUp() {
     MockitoAnnotations.initMocks(this);
     when(factory.getTransaction()).thenReturn(transaction);
-    when(transaction.toString())
-        .thenReturn("String")
-        .thenReturn("SecondString");
     repository = new TransactionRepository(factory);
+    repository.addTransaction(10, 100);
   }
 
   @Test
   public void hasNoTransactionsInitially() {
-    assertEquals(new ArrayList<Transaction>(), repository.getTransactions());
+    TransactionRepository newRepo = new TransactionRepository(factory);
+    assertEquals(new ArrayList<Transaction>(), newRepo.getTransactions());
   }
 
   @Test
   public void addsTransaction() {
-    repository.addTransaction(10, 100);
     assertEquals(1, repository.getTransactions().size());
     assertTrue(repository.getTransactions().contains(transaction));
   }
 
   @Test
-  public void passesAccountToTransaction() {
+  public void addsMultipleTransactions() {
     repository.addTransaction(10, 100);
+    assertEquals(2, repository.getTransactions().size());
+  }
+
+  @Test
+  public void passesAccountToTransaction() {
     verify(transaction).buildTransaction(10, 100);
   }
 

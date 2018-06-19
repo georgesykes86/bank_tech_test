@@ -1,6 +1,5 @@
 package com.makersacademy.banktechtest.Unit;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.makersacademy.banktechtest.Transaction;
