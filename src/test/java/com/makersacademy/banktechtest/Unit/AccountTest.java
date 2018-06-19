@@ -27,7 +27,7 @@ public class AccountTest {
   private Printer printer;
 
   @BeforeEach
-  public void setUp() {
+  public void setUp() throws InvalidTransactionAmountException {
     MockitoAnnotations.initMocks(this);
     when(repository.printTransactions()).thenReturn(returnString);
     account = new Account(repository, printer);
@@ -46,21 +46,31 @@ public class AccountTest {
   }
 
   @Test
-  public void accountMakesSecondDeposit() {
+  public void accountMakesSecondDeposit() throws InvalidTransactionAmountException {
     account.deposit(150);
     assertEquals(250, account.getBalance());
   }
 
   @Test
-  public void accountMakesNewTransactionOnDeposit() {
+  public void accountMakesNewTransactionOnDeposit() throws InvalidTransactionAmountException {
     account.deposit(150);
     verify(repository).addTransaction(150, account);
   }
 
   @Test
-  public void accountMakesAnotherNewTransactionOnDeposit() {
+  public void accountMakesAnotherNewTransactionOnDeposit() throws InvalidTransactionAmountException {
     account.deposit(250);
     verify(repository).addTransaction(250, account);
+  }
+
+  @Test
+  public void throwsErrorIfNegativeDepositAmountEntered() {
+    assertThrows(InvalidTransactionAmountException.class, () -> { account.deposit(-100); });
+  }
+
+  @Test
+  public void throwsErrorIfZeroDepositAmountEntered() {
+    assertThrows(InvalidTransactionAmountException.class, () -> { account.deposit(0); });
   }
 
   @Test

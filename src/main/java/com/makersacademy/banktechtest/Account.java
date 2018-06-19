@@ -15,7 +15,8 @@ public class Account {
     return this.balance;
   }
 
-  public void deposit(float amount) {
+  public void deposit(float amount) throws InvalidTransactionAmountException {
+    if(amount <= 0 ) throw new InvalidTransactionAmountException("Amount must be greater than Zero");
     this.balance += amount;
     this.repository.addTransaction(amount, this);
   }
