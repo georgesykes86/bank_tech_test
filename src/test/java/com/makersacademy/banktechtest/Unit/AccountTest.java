@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 import com.makersacademy.banktechtest.Account;
+import com.makersacademy.banktechtest.InvalidTransactionAmountException;
 import com.makersacademy.banktechtest.Printer;
 import com.makersacademy.banktechtest.TransactionRepository;
 import com.makersacademy.banktechtest.ZeroBalanceException;
@@ -63,13 +64,15 @@ public class AccountTest {
   }
 
   @Test
-  public void accountMakesWithdrawal() throws ZeroBalanceException {
+  public void accountMakesWithdrawal() throws ZeroBalanceException,
+      InvalidTransactionAmountException {
     account.withdraw(50);
     assertEquals(50, account.getBalance());
   }
 
   @Test
-  public void accountMakesDifferentWithdrawal() throws ZeroBalanceException {
+  public void accountMakesDifferentWithdrawal() throws ZeroBalanceException,
+      InvalidTransactionAmountException {
     account.withdraw(80);
     assertEquals(20, account.getBalance());
   }
@@ -89,19 +92,27 @@ public class AccountTest {
   }
 
   @Test
-  public void accountDoesntThrowErrorWhenWithdrawalMakesZeroBalance() throws ZeroBalanceException {
+  public void accountDoesntThrowErrorWhenWithdrawalMakesZeroBalance() throws ZeroBalanceException,
+      InvalidTransactionAmountException {
     account.withdraw(100);
     assertEquals(0, account.getBalance());
   }
 
   @Test
-  public void accountCreatesTransactionOnWithdrawal() throws ZeroBalanceException {
+  public void throwsErrorIfNegativeWithdrawalAmountEntered() {
+    assertThrows(InvalidTransactionAmountException.class, () -> { account.withdraw(-100); });
+  }
+
+  @Test
+  public void accountCreatesTransactionOnWithdrawal() throws ZeroBalanceException,
+      InvalidTransactionAmountException {
     account.withdraw(80);
     verify(repository).addTransaction(-80, account);
   }
 
   @Test
-  public void accountCreatesTransactionOnDifferentWithdrawal() throws ZeroBalanceException {
+  public void accountCreatesTransactionOnDifferentWithdrawal() throws ZeroBalanceException,
+      InvalidTransactionAmountException {
     account.withdraw(10);
     verify(repository).addTransaction(-10, account);
   }

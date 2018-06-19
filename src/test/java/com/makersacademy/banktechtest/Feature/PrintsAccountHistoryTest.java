@@ -3,6 +3,7 @@ package com.makersacademy.banktechtest.Feature;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.makersacademy.banktechtest.Account;
+import com.makersacademy.banktechtest.InvalidTransactionAmountException;
 import com.makersacademy.banktechtest.Printer;
 import com.makersacademy.banktechtest.TransactionFactory;
 import com.makersacademy.banktechtest.TransactionRepository;
@@ -44,7 +45,8 @@ public class PrintsAccountHistoryTest {
   }
 
   @Test
-  public void printsAnAccountHistory() throws ZeroBalanceException {
+  public void printsAnAccountHistory() throws ZeroBalanceException,
+      InvalidTransactionAmountException {
     account.deposit(1000);
     account.deposit(2000);
     account.withdraw(500);
@@ -53,7 +55,8 @@ public class PrintsAccountHistoryTest {
   }
 
   @Test
-  public void printsAnotherAccountHistory() throws ZeroBalanceException {
+  public void printsAnotherAccountHistory() throws ZeroBalanceException,
+      InvalidTransactionAmountException {
     account.deposit(2000);
     account.deposit(3000);
     account.withdraw(1500);

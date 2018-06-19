@@ -16,7 +16,7 @@ public class TransactionRepository {
     return transactions;
   }
 
-  public void addTransaction(int amount, Account account) {
+  public void addTransaction(float amount, Account account) {
     transactions.add(createTransaction(amount, account));
   }
 

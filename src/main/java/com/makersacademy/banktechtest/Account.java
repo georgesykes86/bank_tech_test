@@ -15,13 +15,15 @@ public class Account {
     return this.balance;
   }
 
-  public void deposit(int amount) {
+  public void deposit(float amount) {
     this.balance += amount;
     this.repository.addTransaction(amount, this);
   }
 
-  public void withdraw(int amount) throws ZeroBalanceException {
-    if ((this.balance - amount) < 0) throw new ZeroBalanceException("Insufficient Funds");
+  public void withdraw(float amount) throws ZeroBalanceException,
+      InvalidTransactionAmountException {
+    if(amount <= 0 ) throw new InvalidTransactionAmountException("Amount must be greater than Zero");
+    if((this.balance - amount) < 0) throw new ZeroBalanceException("Insufficient Funds");
     this.balance -= amount;
     this.repository.addTransaction((-amount), this);
   }
