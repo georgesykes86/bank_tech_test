@@ -30,4 +30,5 @@ public class PrinterTest {
     printer.print("Another Test String");
     assertEquals("Another Test String", output.toString());
   }
+
 }

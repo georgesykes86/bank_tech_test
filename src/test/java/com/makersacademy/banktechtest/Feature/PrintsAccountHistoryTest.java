@@ -52,8 +52,6 @@ public class PrintsAccountHistoryTest {
     assertEquals(firstTestOutput, output.toString());
   }
 
-
-
   @Test
   public void printsAnotherAccountHistory() throws ZeroBalanceException {
     account.deposit(2000);
@@ -62,6 +60,5 @@ public class PrintsAccountHistoryTest {
     account.printStatement();
     assertEquals(secondTestOutput, output.toString());
   }
-
 
 }

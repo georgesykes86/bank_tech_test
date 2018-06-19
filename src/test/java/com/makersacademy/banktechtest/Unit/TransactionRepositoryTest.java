@@ -32,7 +32,9 @@ public class TransactionRepositoryTest {
   public void setUp() {
     MockitoAnnotations.initMocks(this);
     when(factory.getTransaction()).thenReturn(transaction);
-    when(transaction.toString()).thenReturn("String");
+    when(transaction.toString())
+        .thenReturn("String")
+        .thenReturn("SecondString");
     repository = new TransactionRepository(factory);
   }
 
@@ -61,10 +63,10 @@ public class TransactionRepositoryTest {
   }
 
   @Test
-  public void returnsPrintStringForMultipleTransactions() {
+  public void returnsPrintStringForMultipleTransactionsInCorrectOrder() {
     repository.addTransaction(10, account);
     repository.addTransaction(10, account);
-    assertEquals("String\nString\n", repository.printTransactions());
+    assertEquals("SecondString\nString\n", repository.printTransactions());
   }
 
 }
