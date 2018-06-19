@@ -20,7 +20,7 @@ public class TransactionRepository {
     transactions.add(createTransaction(amount, account));
   }
 
-  private Transaction createTransaction(int amount, Account account) {
+  private Transaction createTransaction(float amount, Account account) {
     Transaction transaction = this.transactionFactory.getTransaction();
     transaction.buildTransaction(amount, account);
     return transaction;

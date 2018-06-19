@@ -2,7 +2,7 @@ package com.makersacademy.banktechtest;
 
 public class Account {
 
-  private int balance;
+  private float balance;
   private TransactionRepository repository;
   private Printer printer;
 
@@ -11,19 +11,19 @@ public class Account {
     this.printer = printer;
   }
 
-  public int getBalance() {
+  public float getBalance() {
     return this.balance;
   }
 
   public void deposit(int amount) {
-    this.repository.addTransaction(amount, this);
     this.balance += amount;
+    this.repository.addTransaction(amount, this);
   }
 
   public void withdraw(int amount) throws ZeroBalanceException {
     if ((this.balance - amount) < 0) throw new ZeroBalanceException("Insufficient Funds");
-    this.repository.addTransaction((-amount), this);
     this.balance -= amount;
+    this.repository.addTransaction((-amount), this);
   }
 
   public void printStatement() {

@@ -30,16 +30,16 @@ public class TransactionTest {
   @BeforeEach
   public void setUp() {
     MockitoAnnotations.initMocks(this);
-    when(firstAccount.getBalance()).thenReturn(200);
-    when(secondAccount.getBalance()).thenReturn(300);
+    when(firstAccount.getBalance()).thenReturn(200.00f);
+    when(secondAccount.getBalance()).thenReturn(300.00f);
     debitTransaction = new Transaction();
     creditTransaction = new Transaction();
-    debitTransaction.buildTransaction(-10, firstAccount);
-    creditTransaction.buildTransaction(20, secondAccount);
+    debitTransaction.buildTransaction(-10.00f, firstAccount);
+    creditTransaction.buildTransaction( 20.00f, secondAccount);
   }
 
-  private String creditOutput = dateFormatted + " || 20 || || 300";
-  private String debitOutput = dateFormatted + " || || 10 || 200";
+  private String creditOutput = dateFormatted + " || 20.00 || || 300.00";
+  private String debitOutput = dateFormatted + " || || 10.00 || 200.00";
 
   @Test
   public void setsTheAmount(){

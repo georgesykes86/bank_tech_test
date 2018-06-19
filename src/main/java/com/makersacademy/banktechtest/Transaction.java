@@ -8,21 +8,21 @@ import java.util.Date;
 
 public class Transaction {
 
-  private int amount;
-  private int balance;
+  private float amount;
+  private float balance;
   private String date;
 
   public Transaction() {}
 
-  public void buildTransaction(int amount, Account account) {
+  public void buildTransaction(float amount, Account account) {
     this.amount = amount;
     this.balance = account.getBalance();
     this.date = setDate();
   }
 
-  public int getAmount() { return this.amount; }
+  public float getAmount() { return this.amount; }
 
-  public int getBalance() { return this.balance; }
+  public float getBalance() { return this.balance; }
 
   private String setDate() {
     Date date = new Date();
@@ -34,9 +34,16 @@ public class Transaction {
 
   public String toString() {
     if(this.amount < 0) {
-      return this.getDate() + " || || " + abs(this.amount) + " || " + this.getBalance();
+      return this.getDate() + " || || " + floatToString(abs(this.amount))
+          + " || " + floatToString(this.getBalance());
     }else {
-      return this.getDate() + " || " + this.amount + " || || " + this.getBalance();
+      return this.getDate() + " || " + floatToString(this.amount)
+          + " || || " + floatToString(this.getBalance());
     }
   }
+
+  private String floatToString(float value) {
+    return String.format("%.02f", value);
+  }
+
 }
