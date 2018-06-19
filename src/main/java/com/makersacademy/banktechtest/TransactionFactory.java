@@ -2,7 +2,7 @@ package com.makersacademy.banktechtest;
 
 public class TransactionFactory {
 
-  public static Transaction getTransaction() {
+  public Transaction getTransaction() {
     return new Transaction();
   }
 

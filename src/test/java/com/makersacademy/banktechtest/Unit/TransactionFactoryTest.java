@@ -9,11 +9,11 @@ import org.junit.jupiter.api.Test;
 
 public class TransactionFactoryTest {
 
-  private TransactionFactory factory = new TransactionFactory();
+  private TransactionFactory transactionFactory = new TransactionFactory();
 
   @Test
   public void returnsANewFactory() {
-    Object transaction = TransactionFactory.getTransaction();
+    Object transaction = transactionFactory.getTransaction();
     assertTrue(transaction instanceof Transaction);
   }
 
