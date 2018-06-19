@@ -39,5 +39,4 @@ public class Transaction {
       return this.getDate() + " || " + this.amount + " || || " + this.getBalance();
     }
   }
-
 }
