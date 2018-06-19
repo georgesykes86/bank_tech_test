@@ -3,6 +3,9 @@ package com.makersacademy.banktechtest.Feature;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.makersacademy.banktechtest.Account;
+import com.makersacademy.banktechtest.Printer;
+import com.makersacademy.banktechtest.TransactionFactory;
+import com.makersacademy.banktechtest.TransactionRepository;
 import com.makersacademy.banktechtest.ZeroBalanceException;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -18,18 +21,27 @@ public class PrintsAccountHistoryTest {
   private Account account;
   private Date date = new Date();
   private final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyy");
-  private String dateFormatted = dateFormat.format(date);
+  private String dateFormatted;
+  private String firstTestOutput = null;
+  private String secondTestOutput = null;
 
   @BeforeEach
   public void setUp() {
-    account = new Account();
+    account = new Account(new TransactionRepository(new TransactionFactory()), new Printer());
     System.setOut(new PrintStream(output));
-  }
+    date =  new Date();
+    dateFormatted = dateFormat.format(date);
 
-  private final String firstTestOutput = "date || credit || debit || balance\n"
-      + dateFormatted + " || || 500.00 || 2500.00\n"
-      + dateFormatted + " || 2000.00 || || 3000.00\n"
-      + dateFormatted + " || 1000.00 || || 1000.00";
+    firstTestOutput = "date || credit || debit || balance\n"
+        + dateFormatted + " || || 500.00 || 2500.00\n"
+        + dateFormatted + " || 2000.00 || || 3000.00\n"
+        + dateFormatted + " || 1000.00 || || 1000.00\n";
+
+    secondTestOutput = "date || credit || debit || balance\n"
+        + dateFormatted + " || || 1500.00 || 3500.00\n"
+        + dateFormatted + " || 3000.00 || || 5000.00\n"
+        + dateFormatted + " || 2000.00 || || 2000.00\n";
+  }
 
   @Test
   public void printsAnAccountHistory() throws ZeroBalanceException {
@@ -40,10 +52,7 @@ public class PrintsAccountHistoryTest {
     assertEquals(firstTestOutput, output.toString());
   }
 
-  private final String secondTestOutput = "date || credit || debit || balance\n"
-      + dateFormatted + " || || 1500.00 || 3500.00\n"
-      + dateFormatted + " || 3000.00 || || 5000.00\n"
-      + dateFormatted + " || 2000.00 || || 2000.00";
+
 
   @Test
   public void printsAnotherAccountHistory() throws ZeroBalanceException {

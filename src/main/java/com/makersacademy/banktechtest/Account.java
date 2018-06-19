@@ -3,8 +3,13 @@ package com.makersacademy.banktechtest;
 public class Account {
 
   private int balance;
+  private TransactionRepository repository;
+  private Printer printer;
 
-  public Account() {}
+  public Account(TransactionRepository repository, Printer printer) {
+    this.repository = repository;
+    this.printer = printer;
+  }
 
   public int getBalance() {
     return this.balance;
@@ -20,10 +25,12 @@ public class Account {
   }
 
   public void printStatement() {
-    System.out.print("date || credit || debit || balance\n" +
-        "18/06/2018 || || 500.00 || 2500.00\n" +
-        "18/06/2018 || 2000.00 || || 3000.00\n" +
-        "18/06/2018 || 1000.00 || || 1000.00"
+    printer.print(
+        getStatementHeader() + "\n" + repository.printTransactions()
     );
+  }
+
+  private String getStatementHeader() {
+    return "date || credit || debit || balance";
   }
 }

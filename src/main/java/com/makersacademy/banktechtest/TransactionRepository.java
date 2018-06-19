@@ -27,7 +27,11 @@ public class TransactionRepository {
   }
 
   public String printTransactions() {
-    return "String\n";
+    String returnString = "";
+    for (Transaction transaction: transactions) {
+      returnString += transaction.toString() + "\n";
+    }
+    return returnString;
   }
 
 }

@@ -55,9 +55,16 @@ public class TransactionRepositoryTest {
   }
 
   @Test
-  public void returnsPrintStringForTransactions() {
+  public void returnsPrintStringForSingleTransaction() {
     repository.addTransaction(10, account);
     assertEquals("String\n", repository.printTransactions());
+  }
+
+  @Test
+  public void returnsPrintStringForMultipleTransactions() {
+    repository.addTransaction(10, account);
+    repository.addTransaction(10, account);
+    assertEquals("String\nString\n", repository.printTransactions());
   }
 
 }

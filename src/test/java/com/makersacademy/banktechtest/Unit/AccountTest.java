@@ -1,26 +1,41 @@
 package com.makersacademy.banktechtest.Unit;
 
+import static org.mockito.Mockito.verify;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.when;
 
 import com.makersacademy.banktechtest.Account;
+import com.makersacademy.banktechtest.Printer;
+import com.makersacademy.banktechtest.TransactionRepository;
 import com.makersacademy.banktechtest.ZeroBalanceException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 public class AccountTest {
 
   private Account account;
+  private final String returnString = "This Return String";
+
+  @Mock
+  private TransactionRepository repository;
+
+  @Mock
+  private Printer printer;
 
   @BeforeEach
   public void setUp() {
-    account = new Account();
+    MockitoAnnotations.initMocks(this);
+    when(repository.printTransactions()).thenReturn(returnString);
+    account = new Account(repository, printer);
     account.deposit(100);
   }
 
   @Test
   public void accountHasZeroBalanceInitially() {
-    Account newAccount = new Account();
+    Account newAccount = new Account(repository, printer);
     assertEquals(0, newAccount.getBalance());
   }
 
@@ -49,7 +64,7 @@ public class AccountTest {
 
   @Test
   public void accountThrowsErrorIfZeroBalance() {
-    Account newAccount = new Account();
+    Account newAccount = new Account(repository, printer);
     Throwable exception = assertThrows(ZeroBalanceException.class, () -> {
       newAccount.withdraw(100);
     });
@@ -65,6 +80,12 @@ public class AccountTest {
   public void accountDoesntThrowErrorWhenWithdrawalMakesZeroBalance() throws ZeroBalanceException {
     account.withdraw(100);
     assertEquals(0, account.getBalance());
+  }
+
+  @Test
+  public void printsCorrectString() {
+    account.printStatement();
+    verify(printer).print("date || credit || debit || balance\n" + "This Return String");
   }
 
 }
