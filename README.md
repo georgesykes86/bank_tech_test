@@ -38,7 +38,7 @@ date || credit || debit || balance
 Getting started
 --------------
 
-####Installation
+#### Installation
 
 
 This application has been designed to be built with Maven to simplify the build process and
@@ -48,7 +48,7 @@ do so by following the guidelines [here](http://maven.apache.org/).
 * Clone the repository
 * Navigate to the top level of the directory using the command line  ``` cd bank_tech_test ```
 
-####How to use
+#### How to use
 
 The app does not have a command line interface so the source code must be changed between 
 runs to alter the output.
@@ -68,7 +68,7 @@ inbuilt run commands.
 Approach
 --------
 
-####Methodology
+#### Methodology
 The ambition for this app was to create well encapsulated classes that were able to interact through
 clear messages. Where appropriate I have tried to use dependency injection to allow classes to be
 isolated from the context.
@@ -78,11 +78,11 @@ parts of the implementation required change.
 
 ![Imgur](https://i.imgur.com/anZGuCp.jpg)
 
-####Technologies
+#### Technologies
 The app was made using Java 8 functionality and Maven as the build tool. Testing was performed using
 JUnit 5 combined with Mockito as a mocking library.
 
-####Testing
+#### Testing
 The development process followed a TDD approach with the development of feature tests to assess the 
 end to end functionality and unit tests to test each of the components in isolation.
 
@@ -91,7 +91,7 @@ The tests can be run from the command line using ```mvn test```
 Further Information
 -------------------
 
-####Areas for development
+#### Areas for development
 * Add command line interface that allows the user to interact with the application
 * Integration of currency types
 * Alternative printing options
@@ -99,3 +99,8 @@ Further Information
 * Currently the Tranasaction date is stored as a string but this may be better as a Date that
  gets turned to a string during printing.
  
+#### License
+This app is free to use but please credit in your own application if you reuse code directly
+
+#### Contributors
+This project is the solo effort by George Sykes.
