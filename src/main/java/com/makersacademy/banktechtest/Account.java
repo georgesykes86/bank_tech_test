@@ -22,6 +22,7 @@ public class Account {
 
   public void withdraw(int amount) throws ZeroBalanceException {
     if ((this.balance - amount) < 0) throw new ZeroBalanceException("Insufficient Funds");
+    this.repository.addTransaction((-amount), this);
     this.balance -= amount;
   }
 

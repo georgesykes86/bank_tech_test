@@ -95,6 +95,18 @@ public class AccountTest {
   }
 
   @Test
+  public void accountCreatesTransactionOnWithdrawal() throws ZeroBalanceException {
+    account.withdraw(80);
+    verify(repository).addTransaction(-80, account);
+  }
+
+  @Test
+  public void accountCreatesTransactionOnDifferentWithdrawal() throws ZeroBalanceException {
+    account.withdraw(10);
+    verify(repository).addTransaction(-10, account);
+  }
+
+  @Test
   public void printsCorrectString() {
     account.printStatement();
     verify(printer).print("date || credit || debit || balance\n" + returnString);
