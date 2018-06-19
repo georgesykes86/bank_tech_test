@@ -13,6 +13,7 @@ import com.makersacademy.banktechtest.Statement;
 import com.makersacademy.banktechtest.Transaction;
 import com.makersacademy.banktechtest.TransactionRepository;
 import com.makersacademy.banktechtest.Exceptions.ZeroBalanceException;
+import com.makersacademy.banktechtest.TransactionValidator;
 import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,6 +34,9 @@ public class AccountTest {
   @Mock
   private Statement statement;
 
+  @Mock
+  private TransactionValidator validator;
+
   private final ArrayList<Transaction> transactions = new ArrayList<>();
   private final float balance = 100;
 
@@ -40,13 +44,13 @@ public class AccountTest {
   public void setUp() throws InvalidTransactionAmountException {
     MockitoAnnotations.initMocks(this);
     when(statement.toString()).thenReturn(returnString);
-    account = new Account(repository, printer, statement);
+    account = new Account(repository, printer, statement, validator);
     account.deposit(balance);
   }
 
   @Test
   public void accountHasZeroBalanceInitially() {
-    Account newAccount = new Account(repository, printer, statement);
+    Account newAccount = new Account(repository, printer, statement, validator);
     assertEquals(0, newAccount.getBalance());
   }
 
@@ -74,21 +78,9 @@ public class AccountTest {
   }
 
   @Test
-  public void accountThrowsCorrectMessageWithInvalidDepositAmount() {
-    Throwable exception = assertThrows(InvalidTransactionAmountException.class, () -> {
-      account.deposit(-10);
-    });
-    assertEquals("Amount must be greater than Zero", exception.getMessage());
-  }
-
-  @Test
-  public void throwsErrorIfNegativeDepositAmountEntered() {
-    assertThrows(InvalidTransactionAmountException.class, () -> { account.deposit(-100); });
-  }
-
-  @Test
-  public void throwsErrorIfZeroDepositAmountEntered() {
-    assertThrows(InvalidTransactionAmountException.class, () -> { account.deposit(0); });
+  public void validatesDepositAmount() throws InvalidTransactionAmountException {
+    account.deposit(10);
+    verify(validator).validateTransaction(10);
   }
 
   @Test
@@ -107,7 +99,7 @@ public class AccountTest {
 
   @Test
   public void accountThrowsErrorIfZeroBalance() {
-    Account newAccount = new Account(repository, printer, statement);
+    Account newAccount = new Account(repository, printer, statement, validator);
     Throwable exception = assertThrows(ZeroBalanceException.class, () -> {
       newAccount.withdraw(100);
     });
@@ -127,21 +119,9 @@ public class AccountTest {
   }
 
   @Test
-  public void accountThrowsCorrectMessageWithInvalidWithdrawalAmount() {
-    Throwable exception = assertThrows(InvalidTransactionAmountException.class, () -> {
-      account.withdraw(-10);
-    });
-    assertEquals("Amount must be greater than Zero", exception.getMessage());
-  }
-
-  @Test
-  public void throwsErrorIfNegativeWithdrawalAmountEntered() {
-    assertThrows(InvalidTransactionAmountException.class, () -> { account.withdraw(-100); });
-  }
-
-  @Test
-  public void throwsErrorIfZeroWithdrawalAmountEntered() {
-    assertThrows(InvalidTransactionAmountException.class, () -> { account.withdraw(0); });
+  public void validatesWithdrawalAmount() throws InvalidTransactionAmountException, ZeroBalanceException {
+    account.withdraw(10);
+    verify(validator).validateTransaction(10);
   }
 
   @Test

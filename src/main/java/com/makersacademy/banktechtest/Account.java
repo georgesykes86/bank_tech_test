@@ -9,11 +9,14 @@ public class Account {
   private TransactionRepository repository;
   private Printer printer;
   private Statement statement;
+  private TransactionValidator validator;
 
-  public Account(TransactionRepository repository, Printer printer, Statement statement) {
+  public Account(TransactionRepository repository, Printer printer,
+      Statement statement, TransactionValidator validator) {
     this.repository = repository;
     this.printer = printer;
     this.statement = statement;
+    this.validator = validator;
   }
 
   public float getBalance() {
@@ -21,14 +24,14 @@ public class Account {
   }
 
   public void deposit(float amount) throws InvalidTransactionAmountException {
-    if(amount <= 0 ) throw new InvalidTransactionAmountException("Amount must be greater than Zero");
+    validator.validateTransaction(amount);
     this.balance += amount;
     this.repository.addTransaction(amount, this.getBalance());
   }
 
   public void withdraw(float amount) throws ZeroBalanceException,
       InvalidTransactionAmountException {
-    if(amount <= 0 ) throw new InvalidTransactionAmountException("Amount must be greater than Zero");
+    validator.validateTransaction(amount);
     if((this.balance - amount) < 0) throw new ZeroBalanceException("Insufficient Funds");
     this.balance -= amount;
     this.repository.addTransaction((-amount), this.getBalance());

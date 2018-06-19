@@ -12,7 +12,7 @@ public class BankRunner {
 
   private static void runApp() throws ZeroBalanceException, InvalidTransactionAmountException {
     TransactionRepository repository = new TransactionRepository(new TransactionFactory());
-    Account account = new Account(repository, new Printer(), new Statement());
+    Account account = new Account(repository, new Printer(), new Statement(), new TransactionValidator());
     account.deposit(1000);
     account.deposit(2000);
     account.withdraw(500);

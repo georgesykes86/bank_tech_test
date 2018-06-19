@@ -26,7 +26,8 @@ public class PrintsAccountHistoryTest {
 
   @BeforeEach
   public void setUp() {
-    account = new Account(new TransactionRepository(new TransactionFactory()), new Printer(), new Statement());
+    account = new Account(new TransactionRepository(new TransactionFactory()),
+        new Printer(), new Statement(), new TransactionValidator());
     System.setOut(new PrintStream(output));
     date =  new Date();
     dateFormatted = dateFormat.format(date);
