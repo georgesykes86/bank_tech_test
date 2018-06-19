@@ -64,6 +64,14 @@ public class AccountTest {
   }
 
   @Test
+  public void accountThrowsCorrectMessageWithInvalidDepositAmount() {
+    Throwable exception = assertThrows(InvalidTransactionAmountException.class, () -> {
+      account.deposit(-10);
+    });
+    assertEquals("Amount must be greater than Zero", exception.getMessage());
+  }
+
+  @Test
   public void throwsErrorIfNegativeDepositAmountEntered() {
     assertThrows(InvalidTransactionAmountException.class, () -> { account.deposit(-100); });
   }
@@ -106,6 +114,14 @@ public class AccountTest {
       InvalidTransactionAmountException {
     account.withdraw(100);
     assertEquals(0, account.getBalance());
+  }
+
+  @Test
+  public void accountThrowsCorrectMessageWithInvalidWithdrawalAmount() {
+    Throwable exception = assertThrows(InvalidTransactionAmountException.class, () -> {
+      account.withdraw(-10);
+    });
+    assertEquals("Amount must be greater than Zero", exception.getMessage());
   }
 
   @Test
