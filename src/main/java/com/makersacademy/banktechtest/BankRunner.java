@@ -1,0 +1,21 @@
+package com.makersacademy.banktechtest;
+
+public class BankRunner {
+
+  public static void main(String[] args) throws ZeroBalanceException,
+      InvalidTransactionAmountException {
+    runApp();
+  }
+
+  private static void runApp() throws ZeroBalanceException, InvalidTransactionAmountException {
+    TransactionRepository repository = new TransactionRepository(new TransactionFactory());
+    Account account = new Account(repository, new Printer());
+    account.deposit(1000);
+    account.deposit(2000);
+    account.withdraw(500);
+    account.withdraw(505.50f);
+    account.deposit(50);
+    account.printStatement();
+  }
+
+}
