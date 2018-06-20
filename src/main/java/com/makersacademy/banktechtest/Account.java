@@ -24,14 +24,14 @@ public class Account {
   }
 
   public void deposit(float amount) throws InvalidTransactionAmountException {
-    validator.validateTransaction(amount);
+    this.validator.validateTransaction(amount);
     this.balance += amount;
     this.repository.addTransaction(amount, this.getBalance());
   }
 
   public void withdraw(float amount) throws ZeroBalanceException,
       InvalidTransactionAmountException {
-    validator.validateTransaction(amount);
+    this.validator.validateTransaction(amount);
     if((this.balance - amount) < 0) throw new ZeroBalanceException("Insufficient Funds");
     this.balance -= amount;
     this.repository.addTransaction((-amount), this.getBalance());
@@ -39,11 +39,11 @@ public class Account {
 
   public void printStatement() {
     createStatement();
-    printer.print(statement.toString());
+    this.printer.print(this.statement.toString());
   }
 
   private void createStatement() {
-    statement.setTransactions(repository.getTransactions());
+    this.statement.setTransactions(this.repository.getTransactions());
   }
 
 }
