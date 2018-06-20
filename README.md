@@ -1,7 +1,7 @@
 Bank Tech Test
 ==============
 
-[Summary](#summary) | [Specification](#specification) | [Getting started](#getting started) | [Approach](#approach) | [More](#further information)
+[Summary](#summary) | [Specification](#specification) | [Getting started](#getting-started) | [Approach](#approach) | [More](#further-information)
 
 ## Summary
 
