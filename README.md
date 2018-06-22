@@ -27,7 +27,7 @@ Given a client makes a the following transactions:
  * A deposit of 1000 on 10-01-2012
  * A deposit of 2000 on 13-01-2012
  * A withdrawal of 500 on 14-01-2012
- 
+
 When she prints her bank statement then she would see...
 
 ```$xslt
@@ -46,12 +46,12 @@ include all necessary dependencies. If you do not have Maven installed it is rec
 do so by following the guidelines [here](http://maven.apache.org/). To get started please follow the
 subsequent steps.
 
-* Clone the repository ```$ git clone git@github.com:georgesykes86/bank_tech_test.git```
+* Clone the repository ```$ git clone https://github.com/georgesykes86/bank_tech_test.git```
 * Navigate to the top level of the directory using the command line  ```$ cd <repo name>```
 
 #### How to use
 
-The app does not have a command line interface so the source code must be changed between 
+The app does not have a command line interface so the source code must be changed between
 runs to alter the output.
 
 The entry point for the application can be found in the BankRunner.java file and the
@@ -63,7 +63,7 @@ Once you are ready to run the app then:
 * Compile the app ```$ mvn package```
 * Run the app ```$ java -cp target/bank_tech_test-1.0-SNAPSHOT.jar com.makersacademy.banktechtest.BankRunner```
 
-If you are using an IDE such as Intellij then you can open the repository in the IDE and use the 
+If you are using an IDE such as Intellij then you can open the repository in the IDE and use the
 inbuilt run commands.
 
 ## Approach
@@ -80,14 +80,14 @@ The image below shows the UML diagram which was generated before starting the pr
 parts of the implementation required change. In particular the TransactionValidator and TransactionFactory
 classes required extraction during the process.
 
-![Imgur](https://i.imgur.com/7yG7CDg.png)
+![Imgur](https://i.imgur.com/FNo8lxQ.png)
 
 #### Technologies
 The app was made using Java 8 functionality and Maven as the build tool. Testing was performed using
 JUnit 5 combined with Mockito as a mocking library.
 
 #### Testing
-The development process followed a TDD approach with the development of feature tests to assess the 
+The development process followed a TDD approach with the development of feature tests to assess the
 end to end functionality and unit tests to test each of the components in isolation.
 
 The tests can be run from the command line using ```$ mvn test```
@@ -99,7 +99,7 @@ The tests can be run from the command line using ```$ mvn test```
 * Integration of currency types
 * Alternative printing options
 * Filtering of transactions by date or amount
- 
+
 #### License
 This app is free to use but please credit in your own application if you reuse code directly
 
