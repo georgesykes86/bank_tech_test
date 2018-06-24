@@ -1,9 +1,9 @@
-Bank Tech Test [![BCH compliance](https://bettercodehub.com/edge/badge/georgesykes86/bank_tech_test?branch=master)](https://bettercodehub.com/)
+Bank Tech Test
 ==============
 
 [Summary](#summary) | [Specification](#specification) | [Getting started](#getting-started) | [Approach](#approach) | [More](#further-information)
 
-
+[![BCH compliance](https://bettercodehub.com/edge/badge/georgesykes86/bank_tech_test?branch=master)](https://bettercodehub.com/)
 
 ## Summary
 
